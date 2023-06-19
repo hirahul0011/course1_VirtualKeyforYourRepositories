@@ -121,7 +121,7 @@ public class VirtualKeyforYourRepositories {
 	
 	private static void addAFileToDirectory(String filesPath,String fileName,String data) throws IOException
     {        
-        FileOutputStream out = new FileOutputStream(filesPath+"\\"+fileName+".txt");
+        FileOutputStream out = new FileOutputStream(filesPath+"\\"+fileName/*+".txt"*/);
         out.write(data.getBytes());
         out.close();
     }
@@ -130,7 +130,7 @@ public class VirtualKeyforYourRepositories {
     {        
 		try
         { 
-            Files.delete(Paths.get(filesPath+"\\"+fileName+".txt")); 
+            Files.delete(Paths.get(filesPath+"\\"+fileName/*+".txt"*/)); 
             System.out.println("Deletion successful.");
             System.out.println("Here is the list of remaining files:");
     		displayingTheFiles();

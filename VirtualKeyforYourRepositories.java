@@ -1,5 +1,6 @@
 package course1_VirtualKeyforYourRepositories;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class VirtualKeyforYourRepositories {
 	}
 	
 	private static void optionsSelection() throws IOException {
-        String[] arr = {"1. I wish to review my files",
+        String[] arr = {"\n\n1. I wish to review my files",
                 "2. I wish to manage my files",
                 "3. Close the application"
         };
@@ -39,6 +40,18 @@ public class VirtualKeyforYourRepositories {
 
                 switch (options){
                     case 1:
+                    	File fObj = new File(filesPath);                    	  
+                    	if(fObj.exists() && fObj.isDirectory())  
+                    	{  
+	                    	// array for the files of the directory pointed by fObj  
+	                    	File a[] = fObj.listFiles();  
+	                    	// display statements  
+	                    	System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");  
+	                    	System.out.println("Displaying Files from the directory : " + fObj);  
+	                    	System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");  
+	                    	// Calling the method  
+	                    	printFileNames(a, 0, 0);  
+                    	}  
                         
                         optionsSelection();
                         break;
@@ -63,6 +76,19 @@ public class VirtualKeyforYourRepositories {
         out.write(data.getBytes());
         out.close();
     }
+	
+	public static void printFileNames(File[] a, int i, int lvl)  
+	{
+		if(i == a.length)  
+		{  
+		return;  
+		}	  
+		if(a[i].isFile())  
+		{  
+		System.out.println(a[i].getName());  
+		}	  
+		printFileNames(a, i + 1, lvl);  
+	} 
 	
 	private static void closeApp() {
         System.out.println("Closing your application... \nThank you!");

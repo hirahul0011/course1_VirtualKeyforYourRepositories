@@ -50,14 +50,14 @@ public class VirtualKeyforYourRepositories {
                         optionsSelection();
                         break;
                     case 2:
-                    	optionsInnerSelection();
-                        optionsSelection();
+                    	optionsInnerSelection();                        
                         break;
                     case 3:                       
                         closeApp();
                         break;
                     default:
                         System.out.println("You have made an invalid choice!");
+                        optionsSelection();
                         break;
                 }
 
@@ -95,6 +95,9 @@ public class VirtualKeyforYourRepositories {
         		optionsInnerSelection();                
                 break;
         	case 3:
+        		System.out.println("Please enter file name that you want to search:");
+        		String fileNameS =  sc.next();
+        		searchSpecifiedFileFromDirectory(filesPath, fileNameS);
         		optionsInnerSelection();                
                 break;
         	case 4:	
@@ -102,6 +105,7 @@ public class VirtualKeyforYourRepositories {
                 break;
         	default:
                 System.out.println("You have made an invalid choice!");
+                optionsInnerSelection(); 
                 break;
         }
 		
@@ -146,6 +150,23 @@ public class VirtualKeyforYourRepositories {
         
     }
 	
+	private static void searchSpecifiedFileFromDirectory(String filesPath,String fileName) throws IOException
+	{
+		File fObj = new File(filesPath);                    	  
+    	if(fObj.exists() && fObj.isDirectory())  
+    	{  
+        	// array for the files of the directory pointed by fObj  
+        	File a[] = fObj.listFiles();
+        	for(int i=0;i<a.length;i++) {
+        		if(a[i].isFile() && a[i].getName().equals(fileName)) {
+        			System.out.println(fileName+" is available in the directory");
+        			return;
+        		}
+        	}
+        	System.out.println("Ooops! "+fileName+" is not available in the directory");
+    	}		
+	}
+	
 	public static void printFileNames(File[] a, int i, int lvl)  
 	{
 		if(i == a.length)  
@@ -176,12 +197,6 @@ public class VirtualKeyforYourRepositories {
 	
 	private static void closeApp() {
         System.out.println("Closing your application... \nThank you!");
-            }
-    private static void search() {
-        
-    }
-    private static void sort() {
-        
-    }
+            }    
 
 }

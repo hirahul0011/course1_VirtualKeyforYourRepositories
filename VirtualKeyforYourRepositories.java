@@ -56,7 +56,7 @@ public class VirtualKeyforYourRepositories {
                         optionsSelection();
                         break;
                     case 2:
-                        
+                    	optionsInnerSelection();
                         optionsSelection();
                         break;
                     case 3:                       
@@ -69,9 +69,69 @@ public class VirtualKeyforYourRepositories {
 
     }
 	
+	private static void optionsInnerSelection() throws IOException {
+		String[] arr1 = {"\n\n1. Add a file to the existing directory list",
+                "2. Delete a specified file from the existing directory list",
+                "3. Search a user specified file from the directory",
+                "4. Return to the main menu"
+    	};
+		String filesPath="H:\\Documents\\Study\\Simpli Learn\\PGP Program - CALTECH\\PG FSD Implement OOPS using JAVA with Data Structures and Beyond\\Assessment-VirtualKeyforYourRepositories\\File Folder";
+    	System.out.println("\nPlease select the operation that you want to perform on the files\t");
+    	int slen = arr1.length;    	
+        for(int i=0; i<slen;i++){
+            System.out.println(arr1[i]);
+            // display the all the Strings mentioned in the String array
+        }
+        Scanner sc = new Scanner(System.in);
+        int  optionsI =  sc.nextInt();
+        switch (optionsI){
+        	case 1:
+        		System.out.println("Please enter the name for the file");
+        		String fileName =  sc.next();
+        		System.out.println("Please enter the info that you want to put in the file");
+        		String data =  sc.next();
+        		addAFileToDirectory(filesPath, fileName, data);
+        		File fObj = new File(filesPath);                    	  
+            	if(fObj.exists() && fObj.isDirectory())  
+            	{  
+                	// array for the files of the directory pointed by fObj  
+                	File a[] = fObj.listFiles();  
+                	// display statements  
+                	System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");  
+                	System.out.println("Displaying Files from the directory : " + fObj);  
+                	System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");  
+                	// Calling the method  
+                	printFileNames(a, 0, 0);  
+            	}  
+            	System.out.println("File added to the directory successfully");
+        		optionsInnerSelection();                
+                break;
+        	case 2:
+        		optionsInnerSelection();                
+                break;
+        	case 3:
+        		optionsInnerSelection();                
+                break;
+        	case 4:	
+        		optionsSelection();
+                break;
+        	default:
+                System.out.println("You have made an invalid choice!");
+                break;
+        }
+		
+	}
+	
 	private static void createFileUsingFileOutputStreamClass(String filesPath,String fileName) throws IOException
     {
         String data = "Test data";
+        FileOutputStream out = new FileOutputStream(filesPath+"\\"+fileName+".txt");
+        out.write(data.getBytes());
+        out.close();
+    }
+	
+	private static void addAFileToDirectory(String filesPath,String fileName,String data) throws IOException
+    {        
         FileOutputStream out = new FileOutputStream(filesPath+"\\"+fileName+".txt");
         out.write(data.getBytes());
         out.close();
